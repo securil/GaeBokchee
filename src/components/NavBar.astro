@@ -1,0 +1,35 @@
+---
+// 현재 페이지의 URL 경로를 가져옵니다
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.replace(/\/$/, ''); // 끝의 슬래시를 제거
+
+// 네비게이션 항목들을 정의합니다
+const navItems = [
+  { path: '/GaeBokchee', label: '홈' },
+  { path: '/GaeBokchee/game', label: '게임' },
+  { path: '/GaeBokchee/nft', label: 'NFT' },
+  { path: '/GaeBokchee/token', label: '토큰' },
+  { path: '/GaeBokchee/dao', label: 'DAO' },
+  { path: '/GaeBokchee/roadmap', label: '로드맵' },
+  { path: '/GaeBokchee/community', label: '커뮤니티' },
+  { path: '/GaeBokchee/join', label: '참여하기' },
+];
+---
+
+<nav class="container">
+  <ul>
+    <li><a href="/GaeBokchee" class="brand">MolaVerse</a></li>
+  </ul>
+  <ul>
+    {navItems.map((item) => (
+      <li>
+        <a 
+          href={item.path} 
+          class={currentPath === item.path ? 'active' : ''}
+        >
+          {item.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>

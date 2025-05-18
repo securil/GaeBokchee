@@ -1,18 +1,54 @@
 ---
-// 기본 레이아웃 구조
-const { title = "개복치 몰라버스" } = Astro.props;
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "MolaVerse - 몰라버스 공식 웹사이트" } = Astro.props;
 ---
+
 <!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css" />
+    <link rel="icon" type="image/svg+xml" href="/GaeBokchee/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title} | MolaVerse</title>
+    <!-- Pico.css CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+      /* 추가 커스텀 스타일 */
+      :root {
+        --primary: #6d28d9;
+        --primary-hover: #5b21b6;
+      }
+      
+      .brand {
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: var(--primary);
+        text-decoration: none;
+      }
+      
+      .active {
+        font-weight: bold;
+        color: var(--primary);
+      }
+      
+      footer {
+        margin-top: 2rem;
+        padding: 2rem 0;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
+    <slot name="header" />
     <main class="container">
       <slot />
     </main>
+    <slot name="footer" />
   </body>
 </html>
